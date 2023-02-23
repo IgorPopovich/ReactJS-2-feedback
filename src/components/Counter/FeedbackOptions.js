@@ -1,7 +1,7 @@
 import React from 'react';
 import './Counter.css';
 
-const Controls = ({ clickGood, clickNeutral,clickBad }) => {
+const FeedbackOptions = ({ clickGood, clickNeutral,clickBad }) => {
 
     return <div className='buttons'>
             <button className='btn' type='button' onClick={clickGood}>
@@ -16,4 +16,4 @@ const Controls = ({ clickGood, clickNeutral,clickBad }) => {
           </div>
 }
 
-export default Controls;
+export default FeedbackOptions;

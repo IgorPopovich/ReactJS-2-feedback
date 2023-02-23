@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Controls from './Controls';
+import FeedbackOptions from './FeedbackOptions';
 import './Counter.css';
-import Values from './Values';
+import Statistics from './Statistics';
 import Notification from './Notification';
 
 class Counter extends Component {
@@ -10,64 +10,64 @@ class Counter extends Component {
   }
 
   state = {
-    good: this.props.initialValue,
-    neutral: this.props.initialValue,
-    bad: this.props.initialValue,
-    total: this.props.initialValue,
-    percentage: this.props.initialValue,
+    goodValue: this.props.initialValue,
+    neutralValue: this.props.initialValue,
+    badValue: this.props.initialValue,
+    totalValue: this.props.initialValue,
+    percentageValue: this.props.initialValue,
   }
   
 
   countTotalFeedback = () => {
     this.setState(prevState => {
-      return ({total: this.state.total + 1})
+      return ({totalValue: this.state.totalValue + 1})
     }, () => this.countPositiveFeedbackPercentage())
   }
 
   countPositiveFeedbackPercentage = () => {
     this.setState(prevState => {
-      return ({percentage: prevState.percentage = Math.round((prevState.good / prevState.total) * 100)})
+      return ({percentageValue: prevState.percentageValue = Math.round((prevState.goodValue / prevState.totalValue) * 100)})
     })
   }
   handleGood = () => {
     this.countTotalFeedback()
     this.setState(prevState => {
-      return ({good: this.state.good + 1})
+      return ({goodValue: this.state.goodValue + 1})
     })
   }
 
   handleNeutral = () => {
     this.countTotalFeedback()
     this.setState({
-      neutral: this.state.neutral + 1,
+      neutralValue: this.state.neutralValue + 1,
     })
   }
 
   handleBad = () => {
     this.countTotalFeedback()
     this.setState({
-      bad: this.state.bad + 1,
+      badValue: this.state.badValue + 1,
     })
   }
 
   render() {
-    const { bad, good, neutral, total, percentage } = this.state
+    const { badValue, goodValue, neutralValue, totalValue, percentageValue } = this.state
     return (
       <div>
         <div className='counter'>
           <p className='title'>Please leave feedback</p>
-          <Controls
+          <FeedbackOptions
             clickGood={this.handleGood}
             clickNeutral={this.handleNeutral}
             clickBad={this.handleBad}
           />
           <p className='title'>Statistics</p>
-          {total > 0 ? <Values 
-              goodValue={good}
-              neutralValue={neutral}
-              badValue={bad}
-              totalValue={total}
-              positiveValue={percentage}
+          {totalValue > 0 ? <Statistics 
+              good={goodValue}
+              neutral={neutralValue}
+              bad={badValue}
+              total={totalValue}
+              positivePercentage={percentageValue}
             /> : <Notification message="There is no feedback" />  
           }
 
