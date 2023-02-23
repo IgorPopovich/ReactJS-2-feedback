@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
 import Controls from './Controls';
 import './Counter.css';
+import Values from './Values';
 
 class Counter extends Component {
+  static defaultProps = {
+    initialValue: 0
+  }
+
   state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
-    total: 0
+    good: this.props.initialValue,
+    neutral: this.props.initialValue,
+    bad: this.props.initialValue,
+    total: this.props.initialValue
   }
 
   countTotalFeedback() {
-
+    this.setState(prevState => ({
+      total: prevState.total + 1,
+    }))
   }
 
   countPositiveFeedbackPercentage() {
@@ -21,19 +28,19 @@ class Counter extends Component {
   handleGood = () => {
     this.setState(prevState => ({
       good: prevState.good + 1,
-    }))
+    }), this.countTotalFeedback())
   }
 
   handleNeutral = () => {
     this.setState(prevState => ({
       neutral: prevState.neutral + 1,
-    }))
+    }), this.countTotalFeedback())
   }
 
   handleBad = () => {
     this.setState(prevState => ({
       bad: prevState.bad + 1,
-    }))
+    }), this.countTotalFeedback())
   }
 
   render() {
@@ -47,13 +54,16 @@ class Counter extends Component {
             clickBad={this.handleBad}
           />
           <p className='title'>Statistics</p>
-          <div className='result'>
-            <span className='value'>Good: {this.state.good}</span>
-            <span className='value'>Neutral: {this.state.neutral}</span>
-            <span className='value'>Bad: {this.state.bad}</span>
-            <span className='value'>Total: {this.state.total}</span>
-            <span className='value'>Positive feedback: 0%</span>
-          </div>
+          {this.state.total > 0 && 
+            <Values 
+              goodValue={this.state.good}
+              neutralValue={this.state.neutral}
+              badValue={this.state.bad}
+              totalValue={this.state.total}
+              positiveValue={0}
+            />
+          }
+
         </div>
       </div>
     )
