@@ -19,7 +19,9 @@ class Counter extends Component {
   }
 
   handleGood = () => {
-
+    this.setState(prevState => ({
+      good: prevState.good + 1,
+    }))
   }
 
   handleNeutral = () => {
