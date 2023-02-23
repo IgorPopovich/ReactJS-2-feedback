@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Controls from './Controls';
 import './Counter.css';
 import Values from './Values';
+import Notification from './Notification';
 
 class Counter extends Component {
   static defaultProps = {
@@ -15,38 +16,42 @@ class Counter extends Component {
     total: this.props.initialValue,
     percentage: this.props.initialValue,
   }
+  
 
-  countTotalFeedback() {
-    this.setState(prevState => ({
-      total: prevState.total + 1,
-    }), this.countPositiveFeedbackPercentage())
+  countTotalFeedback = () => {
+    this.setState(prevState => {
+      return ({total: this.state.total + 1})
+    }, () => this.countPositiveFeedbackPercentage())
   }
 
-  countPositiveFeedbackPercentage() {
-    this.setState(prevState => ({
-      percentage: Math.round((prevState.good / prevState.total) * 100),
-    }))
+  countPositiveFeedbackPercentage = () => {
+    this.setState(prevState => {
+      return ({percentage: prevState.percentage = Math.round((prevState.good / prevState.total) * 100)})
+    })
   }
-
   handleGood = () => {
-    this.setState(prevState => ({
-      good: prevState.good + 1,
-    }), this.countTotalFeedback())
+    this.countTotalFeedback()
+    this.setState(prevState => {
+      return ({good: this.state.good + 1})
+    })
   }
 
   handleNeutral = () => {
-    this.setState(prevState => ({
-      neutral: prevState.neutral + 1,
-    }), this.countTotalFeedback())
+    this.countTotalFeedback()
+    this.setState({
+      neutral: this.state.neutral + 1,
+    })
   }
 
   handleBad = () => {
-    this.setState(prevState => ({
-      bad: prevState.bad + 1,
-    }), this.countTotalFeedback())
+    this.countTotalFeedback()
+    this.setState({
+      bad: this.state.bad + 1,
+    })
   }
 
   render() {
+    const { bad, good, neutral, total, percentage } = this.state
     return (
       <div>
         <div className='counter'>
@@ -57,14 +62,13 @@ class Counter extends Component {
             clickBad={this.handleBad}
           />
           <p className='title'>Statistics</p>
-          {this.state.total > 0 && 
-            <Values 
-              goodValue={this.state.good}
-              neutralValue={this.state.neutral}
-              badValue={this.state.bad}
-              totalValue={this.state.total}
-              positiveValue={this.state.percentage}
-            />
+          {total > 0 ? <Values 
+              goodValue={good}
+              neutralValue={neutral}
+              badValue={bad}
+              totalValue={total}
+              positiveValue={percentage}
+            /> : <Notification message="There is no feedback" />  
           }
 
         </div>
