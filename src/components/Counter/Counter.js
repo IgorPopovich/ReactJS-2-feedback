@@ -12,17 +12,20 @@ class Counter extends Component {
     good: this.props.initialValue,
     neutral: this.props.initialValue,
     bad: this.props.initialValue,
-    total: this.props.initialValue
+    total: this.props.initialValue,
+    percentage: this.props.initialValue,
   }
 
   countTotalFeedback() {
     this.setState(prevState => ({
       total: prevState.total + 1,
-    }))
+    }), this.countPositiveFeedbackPercentage())
   }
 
   countPositiveFeedbackPercentage() {
-
+    this.setState(prevState => ({
+      percentage: Math.round((prevState.good / prevState.total) * 100),
+    }))
   }
 
   handleGood = () => {
@@ -60,7 +63,7 @@ class Counter extends Component {
               neutralValue={this.state.neutral}
               badValue={this.state.bad}
               totalValue={this.state.total}
-              positiveValue={0}
+              positiveValue={this.state.percentage}
             />
           }
 
