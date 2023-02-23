@@ -1,0 +1,28 @@
+.counter {
+    margin: 20px;
+    font-family: sans-serif;
+}
+
+.btn {
+    margin-left: 10px;
+    font-size: 13px;
+    background-color: #fff;
+    border: #c4c4c4 1px solid;
+    padding: 2px 7px 2px 7px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.title {
+    font-size: 23px;
+}
+
+.result {
+    display: flex;
+    flex-direction: column;
+}
+
+.value {
+    margin-top: 7px;
+    font-size: 17px;
+}
