@@ -3,6 +3,7 @@ import FeedbackOptions from './FeedbackOptions';
 import './Counter.css';
 import Statistics from './Statistics';
 import Notification from './Notification';
+import Section from './Section';
 
 class Counter extends Component {
   static defaultProps = {
@@ -55,20 +56,25 @@ class Counter extends Component {
     return (
       <div>
         <div className='counter'>
-          <p className='title'>Please leave feedback</p>
-          <FeedbackOptions
-            clickGood={this.handleGood}
-            clickNeutral={this.handleNeutral}
-            clickBad={this.handleBad}
-          />
+          <Section title={'Please leave feedback'}>
+            <FeedbackOptions
+              clickGood={this.handleGood}
+              clickNeutral={this.handleNeutral}
+              clickBad={this.handleBad}
+            />
+          </Section>
           <p className='title'>Statistics</p>
-          {totalValue > 0 ? <Statistics 
-              good={goodValue}
-              neutral={neutralValue}
-              bad={badValue}
-              total={totalValue}
-              positivePercentage={percentageValue}
-            /> : <Notification message="There is no feedback" />  
+          {totalValue > 0 ? 
+            <Section>
+              <Statistics 
+                good={goodValue}
+                neutral={neutralValue}
+                bad={badValue}
+                total={totalValue}
+                positivePercentage={percentageValue}
+              />
+            </Section>
+             : <Notification message="There is no feedback" />  
           }
 
         </div>
