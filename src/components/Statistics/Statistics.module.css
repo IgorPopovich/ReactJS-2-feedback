@@ -1,0 +1,9 @@
+.result {
+    display: flex;
+    flex-direction: column;
+}
+
+.value {
+    margin-top: 7px;
+    font-size: 17px;
+}

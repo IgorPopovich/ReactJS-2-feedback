@@ -2,6 +2,15 @@
     margin: 20px;
     font-family: sans-serif;
 }
+.title {
+    font-size: 23px;
+}
+
+/* 
+.counter {
+    margin: 20px;
+    font-family: sans-serif;
+}
 
 .btn {
     margin-left: 10px;
@@ -11,9 +20,9 @@
     padding: 2px 7px 2px 7px;
     border-radius: 5px;
     cursor: pointer;
-}
+} */
 
-.title {
+/* .title {
     font-size: 23px;
 }
 
@@ -25,4 +34,4 @@
 .value {
     margin-top: 7px;
     font-size: 17px;
-}
+} */

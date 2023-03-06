@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import FeedbackOptions from './FeedbackOptions';
-import './Counter.css';
-import Statistics from './Statistics';
-import Notification from './Notification';
-import Section from './Section';
+import FeedbackOptions from '../FeedbackOptions/FeedbackOptions';
+import css from './Counter.module.css';
+import Statistics from '../Statistics/Statistics';
+import Notification from '../Notification/Notification';
+import Section from '../Section/Section';
+import PropTypes from 'prop-types';
 
 class Counter extends Component {
   static defaultProps = {
@@ -55,7 +56,7 @@ class Counter extends Component {
     const { badValue, goodValue, neutralValue, totalValue, percentageValue } = this.state
     return (
       <div>
-        <div className='counter'>
+        <div className={css.counter}>
           <Section title={'Please leave feedback'}>
             <FeedbackOptions
               clickGood={this.handleGood}
@@ -63,7 +64,7 @@ class Counter extends Component {
               clickBad={this.handleBad}
             />
           </Section>
-          <p className='title'>Statistics</p>
+          <p className={css.title}>Statistics</p>
           {totalValue > 0 ? 
             <Section>
               <Statistics 
@@ -82,5 +83,9 @@ class Counter extends Component {
     )
   }
 }
+
+Counter.propTypes = {
+  initialValue: PropTypes.number,
+}; 
 
 export default Counter;

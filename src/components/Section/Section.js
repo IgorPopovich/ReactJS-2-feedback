@@ -1,10 +1,10 @@
 import React from 'react';
-import './Counter.css';
+import css from './Section.module.css';
 
 const Section = ( props ) => {
 
   return  <div className='section'>
-              <p className='title'>{props.title}</p>
+              <p className={css.title}>{props.title}</p>
               {props.children}
           </div>
 }
